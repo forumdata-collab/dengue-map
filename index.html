@@ -1025,7 +1025,13 @@ window.__api={applyPeriod,setMetric,setHover,pick,renderInfo,setGameMode,resetCl
 const $ = id => document.getElementById(id);
 const api = window.__api;
 const DURATION = 60;
-function targetKills(l){ return l===2?15 : l===3?25 : 35; }
+/* difficulty scales with the district's AGI level (指數級別越高越難) */
+const DIFF={
+  2:{label:'基礎',stars:'★☆☆',spawn:1.02,spd:1.0, cap:11, tgt:15, r:20},
+  3:{label:'困難',stars:'★★☆',spawn:0.82,spd:1.18,cap:14, tgt:25, r:19},
+  4:{label:'極難',stars:'★★★',spawn:0.66,spd:1.32,cap:17, tgt:35, r:17},
+};
+function targetKills(l){ return (DIFF[l]||DIFF[2]).tgt; }
 
 /* ---------- tiny synth audio ---------- */
 let AC=null, muted=false;
@@ -1073,7 +1079,8 @@ window.__promptGame=function(idx){
   $('gmLvl').textContent=lev.label;
   $('gmLvl').style.color=lev.color;
   $('gmTitle').textContent=a.name.tc+' — 蚊患挑戰';
-  $('gmSub').textContent=`${a.district.tc} · ${a.name.en} · ${api.D.periods[api.periodIdx]} · ${lev.label}${lev.lvl>=3?'（風險高）':'（風險偏高）'}`;
+  const d=DIFF[lev.lvl]||DIFF[2];
+  $('gmSub').textContent=`${a.district.tc} · ${a.name.en} · ${api.D.periods[api.periodIdx]} · ${lev.label}${lev.lvl>=3?'（風險高）':'（風險偏高）'} · 難度 ${d.stars} ${d.label}`;
   MODAL.classList.add('show');
 };
 $('gmYes').addEventListener('click',()=>{ MODAL.classList.remove('show'); openOverlay(); showScreen('gEq'); });
@@ -1106,9 +1113,11 @@ function openEq(){
   const a=api.D.areas[playArea];
   const vA=api.areaValue(a,api.periodIdx,'AGI');
   const lev=api.metricLevel('AGI',vA);
-  const tgt=targetKills(lev?lev.lvl:2);
+  const lvl=lev?Math.max(2,Math.min(4,lev.lvl)):2;
+  const d=DIFF[lvl]||DIFF[2];
+  const tgt=d.tgt;
   $('gEqDistrict').textContent=`${a.name.tc}（${a.district.tc}） · ${api.D.periods[api.periodIdx]}`;
-  $('gEqTarget').textContent=`${DURATION} 秒內滅掉 ${tgt} 隻蚊 · 誘蚊器指數 ${vA==null?'—':vA.toFixed(1)+'%'} · ${lev?lev.label:'—'}`;
+  $('gEqTarget').textContent=`${DURATION} 秒內滅掉 ${tgt} 隻蚊 · 指數 ${vA==null?'—':vA.toFixed(1)+'%'} · ${lev?lev.label:'—'} · 難度 ${d.stars} ${d.label}`;
 }
 $('gStart').addEventListener('click',()=>{
   AC=AC||new (window.AudioContext||window.webkitAudioContext)();
@@ -1133,8 +1142,8 @@ function spawnMosq(G){
   const m=36, top=Math.random()<0.6;
   const x= top? Math.random()*G.W : (Math.random()<0.5?-m:G.W+m);
   const y= top? -m : Math.random()*G.H*0.6;
-  const spd=(48+Math.random()*34)*(G.H/700);
-  G.mosq.push({x,y,r:20,spd,wob:Math.random()*6.28,wobS:1.4+Math.random(),alive:true});
+  const spd=(48+Math.random()*34)*(G.H/700)*G.spdMul;
+  G.mosq.push({x,y,r:G.mosqR,spd,wob:Math.random()*6.28,wobS:1.4+Math.random(),alive:true});
 }
 function spawnPick(G){
   const pool=[['🧴','slow'],['🛡️','shield'],['❤️','heal']];
@@ -1144,9 +1153,15 @@ function spawnPick(G){
 
 function startGame(){
   const a=api.D.areas[playArea];
-  const lev=api.metricLevel('AGI',api.areaValue(a,api.periodIdx,'AGI'));
-  const lvl=lev?lev.lvl:2;
-  const tgt=targetKills(lvl);
+  const vA=api.areaValue(a,api.periodIdx,'AGI');
+  const lev=api.metricLevel('AGI',vA);
+  const lvl=lev?Math.max(2,Math.min(4,lev.lvl)):2;
+  const d=DIFF[lvl]||DIFF[2];
+  const tgt=d.tgt;
+  // continuous boost: higher index value within the same level -> slightly harder still
+  const boost=Math.max(0,Math.min(1,((vA||5)-5)/60));
+  const spdMul=d.spd*(1+boost*0.18);
+  const spawnBase=Math.max(0.4,d.spawn*(1-boost*0.12));
   showScreen('gPlay');
   fitCanvas();
   G={
@@ -1155,6 +1170,7 @@ function startGame(){
     netT:eq==='net'?5:0, shieldUntil:0, slowUntil:0,
     mosq:[], picks:[], fx:[], popups:[],
     spawnT:0.5, pickT:2.5, t:0, over:false, paused:false, won:false, shake:0,
+    spawnBase, spdMul, cap:d.cap, mosqR:d.r,
     player:{x:W/2,y:H-80,r:30}
   };
   $('gPause').textContent='⏸';
@@ -1184,8 +1200,8 @@ function step(G,dt){
   /* spawner */
   G.spawnT-=dt;
   if(G.spawnT<=0&&G.t<G.time){
-    if(G.mosq.length<13) spawnMosq(G);
-    const ramp=Math.max(0.4,0.95-G.t/(DURATION*0.9)*0.5);
+    if(G.mosq.length<G.cap) spawnMosq(G);
+    const ramp=Math.max(0.35,G.spawnBase-G.t/(DURATION*0.9)*0.3);
     G.spawnT=ramp*(0.8+Math.random()*0.4);
   }
   G.pickT-=dt;
