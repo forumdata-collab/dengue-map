@@ -95,6 +95,75 @@ footer a{color:#7fb1e8;text-decoration:none}
 .p-card strong{color:#b7cde8;font-weight:600}
 @media (max-width:1080px){.p-grid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:860px){.p-grid{grid-template-columns:1fr}}
+/* mode toggle + game */
+.mode-row{display:flex;gap:8px}
+.mode-row button{flex:1}
+#gameHint{font-size:11px;color:#c9a227;margin-top:6px;display:none}
+#clearedStat{font-size:11px;color:var(--muted);margin-top:6px}
+/* prompt modal */
+.modal{position:fixed;inset:0;background:rgba(4,10,20,.72);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;z-index:90;padding:20px}
+.modal.show{display:flex}
+.gm-box{background:var(--panel);border:1px solid #2f5b8a;border-radius:14px;padding:22px;max-width:340px;width:100%;box-shadow:0 18px 50px rgba(0,0,0,.5)}
+.gm-box h3{font-size:16px;margin-bottom:4px}
+.gm-box .gm-sub{font-size:12px;color:var(--muted);margin-bottom:12px}
+.gm-data{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.gm-data .gm-chip{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:7px 10px;font-size:12px;flex:1;min-width:90px}
+.gm-data .gm-chip b{display:block;font-size:16px;font-variant-numeric:tabular-nums}
+.gm-data .gm-chip .k{font-size:10px;color:var(--muted)}
+.gm-btns{display:flex;gap:8px}
+.gm-btns button{flex:1}
+.gm-btns .primary{background:var(--red);border-color:var(--red);color:#fff}
+/* game overlay */
+#gameOverlay{position:fixed;inset:0;background:radial-gradient(120% 90% at 50% 0%,#12304e,#081426 65%);z-index:95;display:none;flex-direction:column;align-items:center;justify-content:center;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+#gameOverlay.show{display:flex}
+.g-shell{width:100%;max-width:480px;height:100%;max-height:100dvh;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.g-screen{width:100%;padding:18px}
+.g-screen.hidden{display:none}
+/* equipment screen */
+#gEq{text-align:center}
+#gEq h2{font-size:22px;letter-spacing:1px;margin-bottom:4px}
+#gEq .g-district{font-size:13px;color:var(--muted);margin-bottom:2px}
+#gEq .g-target{font-size:12px;color:var(--muted);margin-bottom:18px}
+.g-equip{display:flex;flex-direction:column;gap:10px;margin-bottom:18px}
+.g-eq{display:flex;align-items:center;gap:12px;text-align:left;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer;transition:border-color .15s}
+.g-eq .gi{font-size:26px;width:44px;height:44px;background:rgba(78,161,255,.1);border:1px solid rgba(78,161,255,.25);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.g-eq .gt{font-size:14px;font-weight:700}
+.g-eq .gd{font-size:11px;color:var(--muted);margin-top:2px}
+.g-eq .gmark{margin-left:auto;font-size:18px;color:transparent}
+.g-eq.active{border-color:var(--accent);background:#13304f}
+.g-eq.active .gmark{color:var(--accent)}
+#gStart{width:100%;min-height:48px;font-size:16px;font-weight:700;background:var(--red);border-color:var(--red);color:#fff;border-radius:12px;margin-bottom:8px}
+#gBack{width:100%;min-height:42px}
+/* play screen */
+#gPlay{position:relative;padding:0;flex:1;display:flex;align-items:stretch;justify-content:center}
+#gPlay.hidden{display:none}
+#gCanvas{display:block;width:100%;height:100%;touch-action:none;border-radius:14px;background:linear-gradient(180deg,#12304e,#0a1c33);box-shadow:0 0 40px rgba(0,0,0,.5)}
+.g-hud{position:absolute;top:10px;left:12px;right:12px;display:flex;justify-content:space-between;align-items:center;pointer-events:none;font-size:13px;z-index:3}
+.g-hud .hbox{background:rgba(8,20,38,.82);border:1px solid rgba(47,91,138,.6);border-radius:10px;padding:5px 8px;text-align:center;flex:1;min-width:0;max-width:150px}
+.g-hud .hk{font-size:9.5px;color:var(--muted);white-space:nowrap}
+.g-hud .hv{font-size:15px;font-weight:700;font-variant-numeric:tabular-nums}
+#gHp{font-size:12px;letter-spacing:0;white-space:nowrap}
+.g-status{position:absolute;top:58px;left:12px;display:flex;gap:6px;z-index:3;pointer-events:none}
+.g-status .st{background:rgba(78,161,255,.18);border:1px solid rgba(78,161,255,.4);border-radius:16px;font-size:11px;padding:3px 10px;display:none}
+#gPause{position:absolute;top:10px;right:12px;z-index:4;min-height:36px;min-width:44px;padding:4px 10px}
+#gToast{position:absolute;left:50%;top:26%;transform:translateX(-50%);font-size:18px;font-weight:700;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.6);z-index:4;pointer-events:none;opacity:0;transition:opacity .25s}
+#gToast.show{opacity:1}
+/* result screen */
+#gResult{text-align:center}
+#gResult .gr-emoji{font-size:64px;margin-bottom:8px}
+#gResult h2{font-size:22px;margin-bottom:6px}
+#gResult .gr-sub{font-size:13px;color:var(--muted);margin-bottom:16px}
+#gResult .gr-stats{display:flex;gap:10px;margin-bottom:20px}
+#gResult .gr-stats .gm-chip{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px;font-size:12px;flex:1}
+#gResult .gr-stats b{display:block;font-size:20px}
+#gResult .gr-btns{display:flex;flex-direction:column;gap:8px}
+#gResult .gr-btns .primary{background:var(--green);border-color:var(--green);color:#fff;min-height:48px;font-size:15px}
+#gResult .gr-btns button{min-height:44px}
+/* confetti */
+.confetti{position:fixed;width:10px;height:10px;border-radius:2px;pointer-events:none;z-index:99;animation:cfall linear forwards}
+@keyframes cfall{0%{transform:translateY(-20px) rotate(0);opacity:1}100%{transform:translateY(105vh) rotate(720deg);opacity:.7}}
+.map-toast{position:fixed;top:15%;left:50%;transform:translateX(-50%);background:rgba(8,20,38,.95);border:1px solid #2f5b8a;color:#d9e6f5;font-size:13px;padding:10px 18px;border-radius:10px;z-index:96;opacity:0;transition:opacity .25s;pointer-events:none;white-space:nowrap}
+.map-toast.show{opacity:1}
 #loading{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--bg);z-index:99;gap:14px}
 .spin{width:38px;height:38px;border:3px solid #23466e;border-top-color:var(--accent);border-radius:50%;animation:sp 1s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
@@ -114,9 +183,10 @@ footer a{color:#7fb1e8;text-decoration:none}
   .panel section:nth-child(2){order:1}   /* 時間瀏覽 —— primary control first */
   .panel section:nth-child(3){order:3}   /* 指標 */
   .panel section:nth-child(4){order:4}   /* 地區篩選 */
-  .panel section:nth-child(5){order:6}   /* 圖例 */
-  .panel section:nth-child(6){order:7}   /* 詳情 */
-  .panel section:nth-child(7){order:8}   /* 趨勢 */
+  .panel section:nth-child(5){order:5}   /* 模式 */
+  .panel section:nth-child(6){order:6}   /* 圖例 */
+  .panel section:nth-child(7){order:7}   /* 詳情 */
+  .panel section:nth-child(8){order:8}   /* 趨勢 */
   .row{width:100%}
   .row button{flex:1;min-height:42px}
   button{min-height:40px}
@@ -177,6 +247,17 @@ footer a{color:#7fb1e8;text-decoration:none}
     <section>
       <h2>地區篩選</h2>
       <select id="district"><option value="">全部地區</option></select>
+    </section>
+
+    <section>
+      <h2>模式</h2>
+      <div class="mode-row">
+        <button id="modeData" class="active">數據模式</button>
+        <button id="modeGame">遊戲模式</button>
+      </div>
+      <div id="gameHint">點擊地圖上黃／紅／紫色地區，進入滅蚊遊戲！通關後該區會由黃變綠。</div>
+      <div id="clearedStat"></div>
+      <button id="resetCleared" style="display:none;margin-top:8px;width:100%">重置滅蚊記錄</button>
     </section>
 
     <section>
@@ -267,6 +348,80 @@ footer a{color:#7fb1e8;text-decoration:none}
 
 <div id="tip"><div class="nm"></div><div class="sub"></div><div class="row2"></div><span class="lvl"></span></div>
 
+<!-- game prompt modal -->
+<div class="modal" id="gameModal">
+  <div class="gm-box">
+    <h3 id="gmTitle">—</h3>
+    <div class="gm-sub" id="gmSub">—</div>
+    <div class="gm-data">
+      <div class="gm-chip"><span class="k">誘蚊器指數</span><b id="gmAgi">—</b></div>
+      <div class="gm-chip"><span class="k">密度指數</span><b id="gmAdi">—</b></div>
+      <div class="gm-chip"><span class="k">指數級別</span><b id="gmLvl">—</b></div>
+    </div>
+    <div class="gm-btns">
+      <button id="gmYes" class="primary">進入遊戲</button>
+      <button id="gmNo">取消</button>
+    </div>
+  </div>
+</div>
+
+<!-- game overlay -->
+<div id="gameOverlay">
+  <div class="g-shell">
+    <div class="g-screen" id="gEq">
+      <h2>滅蚊大作戰</h2>
+      <div class="g-district" id="gEqDistrict">—</div>
+      <div class="g-target" id="gEqTarget">—</div>
+      <div class="g-equip">
+        <button class="g-eq active" data-eq="armor">
+          <span class="gi">🦺</span>
+          <span><span class="gt">防護衣</span><div class="gd">蚊咬傷害減半（推薦）</div></span>
+          <span class="gmark">✓</span>
+        </button>
+        <button class="g-eq" data-eq="band">
+          <span class="gi">🧿</span>
+          <span><span class="gt">驅蚊手帶</span><div class="gd">蚊仔飛行速度減慢 30%</div></span>
+          <span class="gmark">✓</span>
+        </button>
+        <button class="g-eq" data-eq="net">
+          <span class="gi">🛡️</span>
+          <span><span class="gt">蚊帳</span><div class="gd">開局 5 秒無敵，免疫蚊咬</div></span>
+          <span class="gmark">✓</span>
+        </button>
+      </div>
+      <button id="gStart">開始遊戲</button>
+      <button id="gBack">返回地圖</button>
+    </div>
+
+    <div class="g-screen hidden" id="gPlay">
+      <div class="g-hud">
+        <div class="hbox"><div class="hk">生命力</div><div id="gHp">❤️❤️❤️❤️❤️❤️</div></div>
+        <div class="hbox"><div class="hk">剩餘時間</div><div class="hv" id="gTime">60</div></div>
+        <div class="hbox"><div class="hk">滅蚊進度</div><div class="hv" id="gKill">0/25</div></div>
+      </div>
+      <div class="g-status"><span class="st" id="stSlow">🧴 驅蚊劑</span><span class="st" id="stShield">🛡️ 蚊帳</span></div>
+      <button id="gPause">⏸</button>
+      <canvas id="gCanvas"></canvas>
+      <div id="gToast"></div>
+    </div>
+
+    <div class="g-screen hidden" id="gResult">
+      <div class="gr-emoji" id="grEmoji">—</div>
+      <h2 id="grTitle">—</h2>
+      <div class="gr-sub" id="grSub">—</div>
+      <div class="gr-stats">
+        <div class="gm-chip"><span class="k">滅蚊數</span><b id="grKill">—</b></div>
+        <div class="gm-chip"><span class="k">目標</span><b id="grTarget">—</b></div>
+        <div class="gm-chip"><span class="k">剩餘生命</span><b id="grHp">—</b></div>
+      </div>
+      <div class="gr-btns">
+        <button class="primary" id="grAgain">再玩一次</button>
+        <button id="grMap">返回地圖</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script type="importmap">
 {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}
 </script>
@@ -302,6 +457,8 @@ let metric = 'AGI';         // AGI | ADI
 let districtFilter = '';
 let playing = false, playTimer = null;
 let hovered = null, selected = null;
+let gameMode = false;
+const clearedSet = new Set((()=>{ try{ return JSON.parse(localStorage.getItem('dengue_cleared_v1')||'[]'); }catch(e){ return []; } })());
 const LEVEL_COLORS = {};    // material per (metric,level)
 let seaPlane;
 
@@ -424,10 +581,11 @@ function applyPeriod(){
     const v = areaValue(a, periodIdx, metric);
     const lev = metricLevel(metric, v);
     const dim = districtFilter && a.district.tc !== districtFilter;
+    const cleared = clearedSet.has(a.id) && metric === 'AGI';
     am.parts.forEach(m => {
       m.visible = (v != null);
       if(v == null) return;
-      m.material.color.set(lev ? lev.color : '#5c6b80');
+      m.material.color.set(cleared ? '#2e9e4f' : (lev ? lev.color : '#5c6b80'));
       m.material.opacity = dim ? 0.22 : 1;
       const h = (v === 0) ? MINH : Math.min(v * HSCALE, MAXH);
       m.scale.y = h / MAXH;
@@ -526,7 +684,11 @@ function renderInfo(idx){
   document.getElementById('iAgi').textContent = fmt(areaValue(a,periodIdx,'AGI'),1) + (areaValue(a,periodIdx,'AGI')!=null?'%':'');
   document.getElementById('iAdi').textContent = fmt(areaValue(a,periodIdx,'ADI'),1);
   const note = document.getElementById('iNote');
-  if(areaValue(a,periodIdx,'AGI') == null){
+  const cleared = clearedSet.has(a.id) && metric === 'AGI';
+  if(cleared){
+    note.style.display='block';
+    note.textContent = '🏆 此區已通關滅蚊，地圖已由黃／紅轉為綠色（數據維持不變）。';
+  } else if(areaValue(a,periodIdx,'AGI') == null){
     note.style.display='block';
     note.textContent = '此監察地區在所示月份並無指數記錄（可能尚未納入監察或已重組）。';
   } else note.style.display='none';
@@ -614,10 +776,15 @@ function bindEvents(){
   el.addEventListener('pointermove', e => setHover(pick(e)));
   el.addEventListener('pointerdown', e => {
     const m = pick(e);
-    if(m){
-      selected = m.userData.areaIdx;
-      renderInfo(selected);
+    if(!m) return;
+    selected = m.userData.areaIdx;
+    const a = D.areas[selected];
+    const vAGI = areaValue(a, periodIdx, 'AGI');
+    const levAGI = metricLevel('AGI', vAGI);
+    if(gameMode && levAGI && levAGI.lvl >= 2 && !clearedSet.has(a.id)){
+      if(window.__promptGame){ window.__promptGame(selected); return; }
     }
+    renderInfo(selected);
   });
   el.addEventListener('pointerleave', () => setHover(null));
 
@@ -629,6 +796,9 @@ function bindEvents(){
   document.getElementById('btnLatest').addEventListener('click', () => { stopPlay(); periodIdx=D.periods.length-1; slider.value=periodIdx; applyPeriod(); });
   document.getElementById('mAGI').addEventListener('click', () => setMetric('AGI'));
   document.getElementById('mADI').addEventListener('click', () => setMetric('ADI'));
+  document.getElementById('modeData').addEventListener('click', () => setGameMode(false));
+  document.getElementById('modeGame').addEventListener('click', () => setGameMode(true));
+  document.getElementById('resetCleared').addEventListener('click', resetCleared);
   document.getElementById('district').addEventListener('change', e => { districtFilter=e.target.value; applyPeriod(); });
   document.getElementById('iClose').addEventListener('click', () => { selected=null; renderInfo(null); });
 
@@ -657,6 +827,27 @@ function setMetric(m){
   document.getElementById('sL3').parentElement.style.display = m==='AGI'?'block':'none';
   document.getElementById('sL4').parentElement.style.display = m==='AGI'?'block':'none';
   renderLegend(); applyPeriod();
+}
+
+/* ---------- game mode ---------- */
+function setGameMode(m){
+  gameMode = m;
+  if(m && metric !== 'AGI') setMetric('AGI');   // game trigger is AGI-level based — keep map colors consistent
+  document.getElementById('modeData').classList.toggle('active', !m);
+  document.getElementById('modeGame').classList.toggle('active', m);
+  document.getElementById('gameHint').style.display = m ? 'block' : 'none';
+  document.getElementById('resetCleared').style.display = 'inline-block';
+  updateClearedStat();
+}
+function updateClearedStat(){
+  const el = document.getElementById('clearedStat');
+  el.textContent = clearedSet.size ? `已通關 ${clearedSet.size} 區，地圖已由黃／紅轉綠。` : '';
+}
+function resetCleared(){
+  clearedSet.clear();
+  try{ localStorage.removeItem('dengue_cleared_v1'); }catch(e){}
+  applyPeriod(); updateClearedStat();
+  if(window.__toast) window.__toast('已重置滅蚊記錄');
 }
 
 function togglePlay(){
@@ -790,6 +981,7 @@ document.getElementById('slider').max=D.periods.length-1;
 document.getElementById('slider').value=periodIdx;
 applyPeriod();
 bindEvents();
+updateClearedStat();
 document.getElementById('bUpdated').textContent='數據更新至 '+D.latest;
 document.getElementById('loading').style.display='none';
 document.getElementById('app').style.display='flex';
@@ -816,7 +1008,391 @@ window.__THREE=THREE;
 window.__scene=scene;
 window.__areas=areaMeshes;
 window.__D=D;
-window.__api={applyPeriod,setMetric,setHover,pick,renderInfo,get periodIdx(){return periodIdx;}};
+window.__api={applyPeriod,setMetric,setHover,pick,renderInfo,setGameMode,resetCleared,updateClearedStat,
+  get gameMode(){return gameMode;}, get periodIdx(){return periodIdx;},
+  clearedSet, D, areaValue, metricLevel, LEVELS};
+</script>
+<script type="module">
+/* ================= 滅蚊大作戰 (2D timed mosquito game) ================= */
+(function(){
+'use strict';
+const $ = id => document.getElementById(id);
+const api = window.__api;
+const DURATION = 60;
+function targetKills(l){ return l===2?15 : l===3?25 : 35; }
+
+/* ---------- tiny synth audio ---------- */
+let AC=null, muted=false;
+function beep(f,dur,type,vol,when){
+  if(muted||!AC) return;
+  const o=AC.createOscillator(), g=AC.createGain();
+  o.type=type||'sine'; o.frequency.value=f;
+  const t=AC.currentTime+(when||0);
+  g.gain.setValueAtTime(vol||0.08,t);
+  g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+  o.connect(g).connect(AC.destination);
+  o.start(t); o.stop(t+dur+0.03);
+}
+const sfxKill=()=>{beep(880,0.09,'triangle',0.09);beep(1318,0.07,'triangle',0.05,0.02);};
+const sfxBite=()=>{beep(140,0.22,'sawtooth',0.11);beep(100,0.25,'sawtooth',0.08,0.05);};
+const sfxPick=()=>{beep(620,0.1,'sine',0.09);beep(930,0.11,'sine',0.07,0.07);};
+const sfxWin=()=>{[523,659,784,1047].forEach((f,i)=>beep(f,0.16,'sine',0.09,i*0.11));};
+const sfxLose=()=>{[392,311,233].forEach((f,i)=>beep(f,0.22,'sine',0.08,i*0.16));};
+
+/* ---------- map toast (top-level feedback) ---------- */
+window.__toast=function(msg){
+  let d=document.querySelector('.map-toast');
+  if(!d){ d=document.createElement('div'); d.className='map-toast'; document.body.appendChild(d); }
+  d.textContent=msg; d.classList.add('show');
+  clearTimeout(d._t); d._t=setTimeout(()=>d.classList.remove('show'),2300);
+};
+
+/* ---------- state ---------- */
+let playArea=null;      // area idx chosen in the prompt
+let eq='armor';
+let G=null;             // active game state
+let raf=null, lastTs=0;
+
+const OVERLAY=$('gameOverlay'), MODAL=$('gameModal');
+
+/* ---------- prompt modal ---------- */
+window.__promptGame=function(idx){
+  const a=api.D.areas[idx];
+  const vA=api.areaValue(a,api.periodIdx,'AGI');
+  const lev=api.metricLevel('AGI',vA);
+  if(!lev||lev.lvl<2||api.clearedSet.has(a.id)) return;
+  playArea=idx;
+  $('gmAgi').textContent=(vA==null?'—':vA.toFixed(1)+'%');
+  $('gmAdi').textContent=(()=>{const d=api.areaValue(a,api.periodIdx,'ADI');return d==null?'—':d.toFixed(1);})();
+  $('gmLvl').textContent=lev.label;
+  $('gmLvl').style.color=lev.color;
+  $('gmTitle').textContent=a.name.tc+' — 蚊患挑戰';
+  $('gmSub').textContent=`${a.district.tc} · ${a.name.en} · ${api.D.periods[api.periodIdx]} · ${lev.label}${lev.lvl>=3?'（風險高）':'（風險偏高）'}`;
+  MODAL.classList.add('show');
+};
+$('gmYes').addEventListener('click',()=>{ MODAL.classList.remove('show'); openOverlay(); showScreen('gEq'); });
+$('gmNo').addEventListener('click',()=>{ MODAL.classList.remove('show'); });
+
+/* ---------- overlay flow ---------- */
+function openOverlay(){ OVERLAY.classList.add('show'); document.body.style.overflow='hidden'; }
+function closeOverlay(){ OVERLAY.classList.remove('show'); document.body.style.overflow=''; stopGame(); }
+$('gBack').addEventListener('click',closeOverlay);
+$('grMap').addEventListener('click',()=>{
+  const won = !!(G && G.won);
+  const name = (G && G.won && api.D.areas[playArea]) ? api.D.areas[playArea].name.tc : '';
+  closeOverlay();
+  if(won){ api.applyPeriod(); window.__toast('🟢 ' + name + '蚊患已清除，地圖已轉綠'); }
+});
+$('grAgain').addEventListener('click',()=>{ showScreen('gEq'); });
+
+/* equipment select */
+document.querySelectorAll('.g-eq').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.g-eq').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active'); eq=btn.dataset.eq;
+  });
+});
+
+function showScreen(id){
+  ['gEq','gPlay','gResult'].forEach(s=>$(s).classList.toggle('hidden',s!==id));
+}
+function openEq(){
+  const a=api.D.areas[playArea];
+  const vA=api.areaValue(a,api.periodIdx,'AGI');
+  const lev=api.metricLevel('AGI',vA);
+  const tgt=targetKills(lev?lev.lvl:2);
+  $('gEqDistrict').textContent=`${a.name.tc}（${a.district.tc}） · ${api.D.periods[api.periodIdx]}`;
+  $('gEqTarget').textContent=`${DURATION} 秒內滅掉 ${tgt} 隻蚊 · 誘蚊器指數 ${vA==null?'—':vA.toFixed(1)+'%'} · ${lev?lev.label:'—'}`;
+}
+$('gStart').addEventListener('click',()=>{
+  AC=AC||new (window.AudioContext||window.webkitAudioContext)();
+  openEq(); startGame();
+});
+
+/* ---------- game engine ---------- */
+const canvas=$('gCanvas'), ctx=canvas.getContext('2d');
+let W=0,H=0;
+
+function fitCanvas(){
+  const r=$('gPlay').getBoundingClientRect();
+  if(r.width<=0||r.height<=0) return;
+  const dpr=Math.min(window.devicePixelRatio||1,2);
+  W=r.width; H=r.height;
+  canvas.width=Math.round(W*dpr); canvas.height=Math.round(H*dpr);
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+}
+window.addEventListener('resize',()=>{ if(G&&!$('gPlay').classList.contains('hidden')){ fitCanvas(); if(G){G.W=W;G.H=H;G.player.x=W/2;G.player.y=H-80;}}});
+
+function spawnMosq(G){
+  const m=36, top=Math.random()<0.6;
+  const x= top? Math.random()*G.W : (Math.random()<0.5?-m:G.W+m);
+  const y= top? -m : Math.random()*G.H*0.6;
+  const spd=(48+Math.random()*34)*(G.H/700);
+  G.mosq.push({x,y,r:20,spd,wob:Math.random()*6.28,wobS:1.4+Math.random(),alive:true});
+}
+function spawnPick(G){
+  const pool=[['🧴','slow'],['🛡️','shield'],['❤️','heal']];
+  const p=pool[Math.floor(Math.random()*pool.length)];
+  G.picks.push({x:40+Math.random()*(G.W-80),y:80+Math.random()*(G.H*0.5),r:22,emoji:p[0],type:p[1]});
+}
+
+function startGame(){
+  const a=api.D.areas[playArea];
+  const lev=api.metricLevel('AGI',api.areaValue(a,api.periodIdx,'AGI'));
+  const lvl=lev?lev.lvl:2;
+  const tgt=targetKills(lvl);
+  showScreen('gPlay');
+  fitCanvas();
+  G={
+    W,H, canvas, ctx, target:tgt, time:DURATION, kills:0,
+    hp:6, hpMax:6, biteDmg:eq==='armor'?1:2, slowF:eq==='band'?0.7:1,
+    netT:eq==='net'?5:0, shieldUntil:0, slowUntil:0,
+    mosq:[], picks:[], fx:[], popups:[],
+    spawnT:0.5, pickT:2.5, t:0, over:false, paused:false, won:false, shake:0,
+    player:{x:W/2,y:H-80,r:30}
+  };
+  $('gPause').textContent='⏸';
+  lastTs=0;
+  cancelAnimationFrame(raf);
+  raf=requestAnimationFrame(loop);
+}
+function stopGame(){
+  cancelAnimationFrame(raf); raf=null; G=null;
+}
+
+function loop(ts){
+  if(!G){ return; }
+  if(lastTs&&!G.paused&&!G.over){
+    const dt=Math.min(0.05,(ts-lastTs)/1000);
+    step(G,dt);
+  }
+  lastTs=ts;
+  render(G);
+  if(G&&!G.over) raf=requestAnimationFrame(loop);
+  else raf=null;
+}
+
+function step(G,dt){
+  G.t+=dt; G.time=Math.max(0,G.time-dt);
+  G.shake=Math.max(0,G.shake-dt);
+  /* spawner */
+  G.spawnT-=dt;
+  if(G.spawnT<=0&&G.t<G.time){
+    if(G.mosq.length<13) spawnMosq(G);
+    const ramp=Math.max(0.4,0.95-G.t/(DURATION*0.9)*0.5);
+    G.spawnT=ramp*(0.8+Math.random()*0.4);
+  }
+  G.pickT-=dt;
+  if(G.pickT<=0&&G.picks.length<2){ spawnPick(G); G.pickT=5.5+Math.random()*3; }
+
+  /* mosquitoes */
+  for(let i=G.mosq.length-1;i>=0;i--){
+    const m=G.mosq[i];
+    if(!m.alive){ G.mosq.splice(i,1); continue; }
+    const dx=G.player.x-m.x, dy=G.player.y-m.y;
+    const d=Math.hypot(dx,dy)||1;
+    const spd=m.spd*(G.t<G.slowUntil?0.5:1)*G.slowF;
+    m.wob+=dt;
+    const ang=Math.atan2(dy,dx)+Math.sin(m.wob*m.wobS)*0.55;
+    m.x+=Math.cos(ang)*spd*dt; m.y+=Math.sin(ang)*spd*dt;
+    const shielded=G.t<G.shieldUntil||G.t<G.netT;
+    if(d<G.player.r+m.r*0.75){
+      if(shielded){
+        m.alive=false; addFx(G,'block',m.x,m.y); addPopup(G,'擋住!',m.x,m.y-14,'#4ea1ff');
+      } else {
+        m.alive=false;
+        G.hp-=G.biteDmg; G.shake=0.45; sfxBite();
+        G.lastBiteT=G.t;
+        addFx(G,'bite',m.x,m.y); addPopup(G,'−'+G.biteDmg,m.x,m.y-14,'#ff6b6b');
+        if(G.hp<=0){ endGame(false); return; }
+      }
+    }
+  }
+  if(G.time<=0&&!G.over){ endGame(G.kills>=G.target); return; }
+  updateHud(G);
+}
+
+function addFx(G,type,x,y){
+  G.fx.push({type,x,y,t:0});
+}
+function addPopup(G,text,x,y,color){
+  G.popups.push({text,x,y,color,t:0});
+}
+function applyPick(G,p){
+  if(p.type==='slow'){ G.slowUntil=G.t+5; addFx(G,'slowAura',p.x,p.y); }
+  else if(p.type==='shield'){ G.shieldUntil=G.t+5; addFx(G,'shieldAura',p.x,p.y); }
+  else { G.hp=Math.min(G.hpMax,G.hp+2); addPopup(G,'+2 ❤',p.x,p.y,'#5fd38a'); }
+}
+
+/* input */
+canvas.addEventListener('pointerdown',e=>{
+  if(!G||G.paused||G.over) return;
+  e.preventDefault();
+  const r=canvas.getBoundingClientRect();
+  const x=e.clientX-r.left, y=e.clientY-r.top;
+  // kill mosquitoes first
+  let hit=false;
+  for(const m of G.mosq){
+    if(m.alive&&Math.hypot(m.x-x,m.y-y)<=m.r+13){
+      m.alive=false; G.kills++; sfxKill();
+      addFx(G,'splat',m.x,m.y); addPopup(G,'+1',m.x,m.y-14,'#bfe8c8');
+      hit=true;
+      if(G.kills>=G.target){ endGame(true); return; }
+      break;
+    }
+  }
+  if(!hit){
+    for(let i=G.picks.length-1;i>=0;i--){
+      const p=G.picks[i];
+      if(Math.hypot(p.x-x,p.y-y)<=p.r+14){
+        applyPick(G,p); sfxPick(); addFx(G,'splat',p.x,p.y);
+        G.picks.splice(i,1); hit=true; break;
+      }
+    }
+  }
+});
+
+/* pause */
+$('gPause').addEventListener('click',()=>{
+  if(!G) return;
+  G.paused=!G.paused;
+  $('gPause').textContent=G.paused?'▶':'⏸';
+});
+document.addEventListener('visibilitychange',()=>{ if(G&&document.hidden&&!G.paused&&!G.over){ G.paused=true; $('gPause').textContent='▶'; } });
+
+/* ---------- render ---------- */
+function render(G){
+  const c=G.ctx;
+  c.save();
+  if(G.shake>0){ const s=G.shake*9; c.translate((Math.random()-0.5)*s,(Math.random()-0.5)*s); }
+  // background
+  c.fillStyle='#0d2540'; c.fillRect(0,0,G.W,G.H);
+  // subtle stripes
+  c.fillStyle='rgba(255,255,255,0.02)';
+  for(let i=0;i<G.H;i+=34){ c.fillRect(0,i,G.W,17); }
+  // fx
+  for(const f of G.fx){
+    f.t+=0.033;
+    if(f.type==='splat'){
+      c.globalAlpha=Math.max(0,1-f.t/0.5);
+      c.fillStyle='#3fae5a';
+      c.beginPath(); c.arc(f.x,f.y,10+f.t*18,0,7); c.fill();
+      c.fillStyle='#c8e6c9';
+      c.beginPath(); c.arc(f.x,f.y,5,0,7); c.fill();
+    } else if(f.type==='bite'){
+      c.globalAlpha=Math.max(0,1-f.t/0.4);
+      c.strokeStyle='#ff6b6b'; c.lineWidth=3;
+      c.beginPath(); c.arc(f.x,f.y,8+f.t*22,0,7); c.stroke();
+    }
+    c.globalAlpha=1;
+  }
+  G.fx=G.fx.filter(f=>f.t<0.6);
+  // pickups
+  for(const p of G.picks){
+    const bob=Math.sin(G.t*3+p.x)*3;
+    c.font='30px serif'; c.textAlign='center'; c.textBaseline='middle';
+    c.fillText(p.emoji,p.x,p.y+bob);
+    c.strokeStyle='rgba(255,215,120,0.55)'; c.lineWidth=1.5;
+    c.beginPath(); c.arc(p.x,p.y+bob,p.r+2,0,7); c.stroke();
+  }
+  // mosquito status tints
+  const slowOn=G.t<G.slowUntil, shieldOn=G.t<G.shieldUntil||G.t<G.netT;
+  for(const m of G.mosq){
+    c.save();
+    c.translate(m.x,m.y);
+    const ang=Math.atan2(G.player.y-m.y,G.player.x-m.x);
+    c.rotate(ang+Math.PI/2);
+    if(slowOn){ c.strokeStyle='rgba(120,180,255,0.75)'; c.lineWidth=2; c.beginPath(); c.arc(0,0,m.r+6,0,7); c.stroke(); }
+    if(shieldOn&&G.t>=G.netT){ c.strokeStyle='rgba(255,215,120,0.8)'; c.lineWidth=2; c.setLineDash([4,3]); c.beginPath(); c.arc(0,0,m.r+3,0,7); c.stroke(); c.setLineDash([]); }
+    c.font='34px serif';
+    c.fillText('🦟',0,0);
+    c.restore();
+  }
+  // player
+  const pl=G.player;
+  c.save();
+  c.translate(pl.x,pl.y);
+  if(shieldOn){ 
+    c.fillStyle='rgba(255,215,120,.14)'; c.beginPath(); c.arc(0,0,pl.r+12,0,7); c.fill();
+    c.strokeStyle='rgba(255,215,120,.7)'; c.lineWidth=2; c.beginPath(); c.arc(0,0,pl.r+12,0,7); c.stroke();
+  }
+  // bite flash
+  if(G.t-G.lastBiteT<0.35){ c.strokeStyle='rgba(255,80,80,.8)'; c.lineWidth=3; c.beginPath(); c.arc(0,0,pl.r+6,0,7); c.stroke(); }
+  c.font='46px serif'; c.textAlign='center'; c.textBaseline='middle';
+  c.fillText('🧍',0,0);
+  c.restore();
+  // popups
+  for(const p of G.popups){
+    p.t+=0.033; const al=Math.max(0,1-p.t/0.7);
+    c.globalAlpha=al; c.font='bold 15px sans-serif'; c.textAlign='center';
+    c.fillStyle=p.color;
+    c.fillText(p.text,p.x,p.y-p.t*26);
+    c.globalAlpha=1;
+  }
+  G.popups=G.popups.filter(p=>p.t<0.7);
+  // paused overlay
+  if(G.paused){
+    c.fillStyle='rgba(6,14,26,0.6)'; c.fillRect(0,0,G.W,G.H);
+    c.fillStyle='#d9e6f5'; c.font='bold 22px sans-serif'; c.textAlign='center';
+    c.fillText('已暫停',G.W/2,G.H/2-10);
+    c.fillStyle='#8fa9c6'; c.font='13px sans-serif';
+    c.fillText('點擊 ▶ 繼續',G.W/2,G.H/2+18);
+  }
+  c.restore();
+  updateHud(G);
+}
+
+function updateHud(G){
+  const hearts=Math.max(0,Math.min(6,Math.ceil(G.hp)));
+  $('gHp').textContent=('❤️'.repeat(hearts))+'🖤'.repeat(6-hearts);
+  $('gTime').textContent=Math.ceil(G.time);
+  $('gKill').textContent=`${G.kills}/${G.target}`;
+  const stSlow=$('stSlow'), stShield=$('stShield');
+  stSlow.style.display=(G.t<G.slowUntil)?'block':'none';
+  stShield.style.display=(G.t<G.shieldUntil||G.t<G.netT)?'block':'none';
+  if(stShield.style.display==='block') stShield.textContent='🛡️ 蚊帳 '+(G.t<G.netT?Math.ceil(G.netT-G.t):Math.ceil(G.shieldUntil-G.t))+'s';
+}
+
+/* ---------- end game ---------- */
+function endGame(win){
+  G.over=true; G.won=win;
+  cancelAnimationFrame(raf); raf=null;
+  if(win) sfxWin(); else sfxLose();
+  const a=api.D.areas[playArea];
+  $('grEmoji').textContent=win?'🎉':'😵';
+  $('grTitle').textContent=win?'通關成功！':'未能清除蚊患';
+  $('grSub').textContent=win?`${a.name.tc}的蚊患已清除，地圖已由黃／紅轉為綠色！`:'再接再厲，裝備防護衣再試一次！';
+  $('grKill').textContent=G.kills+' / '+G.target;
+  $('grTarget').textContent=G.target;
+  $('grHp').textContent=Math.max(0,G.hp)+' / 6';
+  if(win){
+    api.clearedSet.add(a.id);
+    try{ localStorage.setItem('dengue_cleared_v1',JSON.stringify([...api.clearedSet])); }catch(e){}
+    confetti();
+  }
+  updateClearedStatBridge();
+  setTimeout(()=>showScreen('gResult'), win?600:500);
+}
+function updateClearedStatBridge(){
+  if(typeof api.updateClearedStat==='function') api.updateClearedStat();
+  const el=document.getElementById('clearedStat');
+  if(el&&api.clearedSet.size) el.textContent=`已通關 ${api.clearedSet.size} 區，地圖已由黃／紅轉綠。`;
+}
+function confetti(){
+  const colors=['#f2b705','#2e9e4f','#4ea1ff','#d64541','#8e44ad','#fff'];
+  for(let i=0;i<26;i++){
+    const d=document.createElement('div');
+    d.className='confetti';
+    d.style.left=Math.random()*100+'vw';
+    d.style.background=colors[i%colors.length];
+    d.style.animationDuration=(1.4+Math.random()*1.4)+'s';
+    d.style.animationDelay=(Math.random()*0.5)+'s';
+    document.body.appendChild(d);
+    setTimeout(()=>d.remove(),3200);
+  }
+}
+window.__game={get G(){return G;}, get playArea(){return playArea;}, get eq(){return eq;}};
+})();
 </script>
 </body>
 </html>
